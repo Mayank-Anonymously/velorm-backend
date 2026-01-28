@@ -1,47 +1,43 @@
 const express = require('express');
 const {
 	AddCategories,
-	GetAllCatgoriesById,
-	GetSingleCatgoryById,
 	GetAllCategories,
-	AddSubCategories,
-	GetAllSubCategoriesById,
-	GetAllSubCategories,
+	GetSingleCategoryById,
 	EditCategoryById,
-	getSubCategoryById,
-	updateSubCategoryById,
-	deleteSubCategoryById,
+	DeleteCategoryById,
 } = require('../../controller/categories/category');
+
 const uploadCategoryImage = require('../../multer/categoryMulter');
-const uploadSubCategoryImage = require('../../multer/subCategory');
+
 const categoryRouter = express.Router();
 
+/**
+ * CREATE CATEGORY
+ */
 categoryRouter.post('/create-category', uploadCategoryImage, AddCategories);
-categoryRouter.get('/get-all-categories', GetAllCategories);
-categoryRouter.get(
-	'/get-filtered-category/:_id',
 
-	GetAllCatgoriesById,
-);
-categoryRouter.get('/get-single-category-by-id/:_id', GetSingleCatgoryById);
-categoryRouter.post(
-	'/create-sub-category/:_id',
-	uploadSubCategoryImage,
-	AddSubCategories,
-);
-categoryRouter.get('/get-sub-category-by-cat-id/:_id', GetAllSubCategoriesById);
-categoryRouter.get('/get-all-sub-category', GetAllSubCategories);
+/**
+ * GET ALL CATEGORIES
+ */
+categoryRouter.get('/get-all-categories', GetAllCategories);
+
+/**
+ * GET SINGLE CATEGORY BY ID
+ */
+categoryRouter.get('/get-single-category-by-id/:_id', GetSingleCategoryById);
+
+/**
+ * EDIT CATEGORY BY ID
+ */
 categoryRouter.patch(
 	'/edit-category-by-id/:_id',
 	uploadCategoryImage,
 	EditCategoryById,
 );
-categoryRouter.get('/get-subcategory-by-id/:id', getSubCategoryById);
-categoryRouter.post(
-	'/update-subcategory-by-id/:id',
-	uploadSubCategoryImage,
-	updateSubCategoryById,
-);
-categoryRouter.get('/delete-subcategory-by-id/:id', deleteSubCategoryById);
+
+/**
+ * DELETE CATEGORY BY ID
+ */
+categoryRouter.delete('/delete-category-by-id/:_id', DeleteCategoryById);
 
 module.exports = categoryRouter;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
-const mongooseserial = require('mongoose-serial');
-const { subCategory } = require('./subcategories');
+
+
 
 const category = new mongoose.Schema(
 	{
@@ -9,7 +9,7 @@ const category = new mongoose.Schema(
 		categoryImage: String,
 		categoryDescription: String,
 		status: Boolean,
-		subCategory: [subCategory],
+	
 		type: String,
 	},
 	{ timestamps: true },
